@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBTHost.com – Advanced Quiz Platform for Educators and Developers</title>
+    <meta name="description" content="Create, share, and practice quizzes for free with CBTHost. Perfect for instructors and students with offline exam support and mobile app access.">
+    <meta name="keywords" content="free quiz maker, online quiz tool, create quiz, student assessment, CBT software, CBTHost, computer-based testing, quiz platform, offline exams, mobile quiz app, educational API">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slido: {
+                            green: '#198038',
+                            light: '#faf7f0',
+                            dark: '#1c5d8c',
+                            orange: '#FF8C42',
+                            purple: '#6A7FDB',
+                            blue: '#3B82F6'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #faf7f0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23198038' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        .code-block {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "CBTHost.com",
+      "operatingSystem": "Web, Android, iOS",
+      "applicationCategory": "EducationApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "125"
+      }
+    }
+    </script>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Header with Navigation Menu -->
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="#" class="text-slido-green text-2xl font-bold flex items-center">
+                    <i class="fas fa-pencil-alt mr-2"></i>
+                    CBTHost<span class="text-blue-700">.com</span>
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-6">
+                <nav class="flex items-center space-6 mr-6">
+                    <a href="#" class="text-gray-600 hover:text-slido-green font-medium">Home</a>
+                    <a href="#features" class="text-gray-600 hover:text-slido-green font-medium">Features</a>
+                    <a href="#api" class="text-gray-600 hover:text-slido-green font-medium">API</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-slido-green font-medium">Pricing</a>
+                    <div class="relative group mx-4">
+                        <button class="text-gray-600 hover:text-slido-green font-medium focus:outline-none">
+                            Resources <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-md mt-2 p-2 w-48 z-50">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded">Question Bank</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded">Templates</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded">Blog</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded">API Docs</a>
+                        </div>
+                    </div>
+                </nav>
+                
+                <div class="flex items-center">
+                    <a href="#" class="mr-4 font-medium hover:text-slido-green">Login</a>
+                    <a href="https://app.cbthost.com">
+                    <button class="text-white px-4 py-2 rounded-md font-medium hover:bg-green-700 transition-colors">
+                        Sign Up Free
+                    </button>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-4 pt-2 pb-4">
+            <a href="#" class="block py-2 text-gray-600">Home</a>
+            <a href="#features" class="block py-2 text-gray-600">Features</a>
+            <a href="#api" class="block py-2 text-gray-600">API</a>
+            <a href="#pricing" class="block py-2 text-gray-600">Pricing</a>
+            <a href="#" class="block py-2 text-gray-600">Login</a>
+            <a href="#" class="block py-2 text-slido-green font-medium">Sign Up Free</a>
+            <div class="border-t mt-4 pt-4">
+                <a href="#" class="block py-2 text-sm text-gray-500">Terms of Service</a>
+                <a href="#" class="block py-2 text-sm text-gray-500">Privacy Policy</a>
+                <a href="#" class="block py-2 text-sm text-gray-500">Contact Us</a>
+                <a href="#" class="block py-2 text-sm text-gray-500">API Documentation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern py-12 md:py-20">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                    The Ultimate Quiz Platform for <span class="text-slido-green">Education</span>
+                </h1>
+                <p class="text-xl mb-8 text-gray-600">
+                    Create engaging quizzes, practice with millions of questions, and take exams anytime - online or offline. Perfect for instructors and students with free mobile access.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://cbthost.com">
+                    <button class="bg-slido-green text-white px-6 py-3 rounded-lg font-medium hover:bg-green-600 transition-colors flex items-center">
+                        <i class="fas fa-rocket mr-2"></i> Start Creating Quizzes – Free
+                    </button>
+                    </a>
+                    <a href="#features">
+                    <button class="bg-white text-slido-green border border-slido-green px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                        Explore Features
+                    </button>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center animate-float">
+                <div class="relative w-full max-w-md">
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-slido-green rounded-lg opacity-10 animate-pulse-slow"></div>
+                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-slido-purple rounded-lg opacity-10 animate-pulse-slow"></div>
+                    <div class="relative bg-white rounded-xl shadow-lg p-6 border border-gray-100 transform rotate-2">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold text-lg">Sample Quiz</h3>
+                            <span class="bg-slido-green text-white text-xs px-2 py-1 rounded">10 Qs</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-100 p-4 rounded-lg">
+                                <p class="text-sm font-medium">What is the capital of France?</p>
+                                <div class="mt-2 space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 rounded-full border border-gray-400 mr-2"></div>
+                                        <span class="text-sm">London</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 rounded-full border border-gray-400 mr-2"></div>
+                                        <span class="text-sm">Berlin</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 rounded-full border border-slido-green mr-2 bg-slido-green"></div>
+                                        <span class="text-sm font-medium text-slido-green">Paris</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-4 h-4 rounded-full border border-gray-400 mr-2"></div>
+                                        <span class="text-sm">Madrid</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between">
+                                <div class="text-sm text-gray-500">Question 1 of 10</div>
+                                <button class="text-sm text-slido-green font-medium">Next <i class="fas fa-arrow-right ml-1"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Powerful Features for Learning Success</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to create, practice, and assess knowledge - both online and offline.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-green text-4xl mb-6">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Easy Quiz Creation</h3>
+                    <p class="text-gray-600 mb-4">
+                        Craft custom multiple-choice, true/false, and short-answer quizzes. Simple, fast, and completely free.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-purple text-4xl mb-6">
+                        <i class="fas fa-wifi-slash"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Offline Exam Support</h3>
+                    <p class="text-gray-600 mb-4">
+                        Conduct exams without internet connectivity. Perfect for areas with limited internet access.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-orange text-4xl mb-6">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Free Mobile App</h3>
+                    <p class="text-gray-600 mb-4">
+                        Students can take quizzes anytime, anywhere with our free mobile app available on Play Store.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-green text-4xl mb-6">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Millions of Questions</h3>
+                    <p class="text-gray-600 mb-4">
+                        <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2 py-1 rounded">Coming Soon</span>
+                        Access our massive question bank with detailed explanations for unlimited practice.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-purple text-4xl mb-6">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Smart Explanations</h3>
+                    <p class="text-gray-600 mb-4">
+                        <span class="bg-yellow-100 text-yellow-800 text-sm font-medium px-2 py-1 rounded">Coming Soon</span>
+                        Ask any question and get detailed explanations with follow-up quizzes to test your understanding.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white p-8 rounded-xl shadow-sm transition-all duration-300">
+                    <div class="text-slido-orange text-4xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Performance Analytics</h3>
+                    <p class="text-gray-600 mb-4">
+                        Track progress with detailed reports and analytics to identify strengths and areas for improvement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API & Institutional Features Section -->
+    <section id="api" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">API Access & Institutional Features</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Powerful tools for developers and institutions to integrate, manage, and verify student data securely.
+                </p>
+            </div>
+
+            <div class="flex flex-wrap mb-8 justify-center">
+                <button class="tab-button bg-white border border-gray-300 px-6 py-3 rounded-l-lg font-medium" data-tab="api-tab">
+                    API Access
+                </button>
+                <button class="tab-button bg-white border border-gray-300 border-l-0 px-6 py-3 font-medium" data-tab="verification-tab">
+                    Student Verification
+                </button>
+                <button class="tab-button bg-white border border-gray-300 border-l-0 px-6 py-3 rounded-r-lg font-medium active" data-tab="data-tab">
+                    Data Management
+                </button>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <!-- API Tab Content -->
+                <div id="api-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Developer API Access</h3>
+                            <p class="text-gray-600 mb-6">
+                                Integrate QuizMaker.top with your existing systems using our comprehensive REST API. 
+                                Verify student results, fetch performance data, and manage institutional accounts programmatically.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Secure API key authentication</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Real-time student result verification</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Comprehensive documentation and SDKs</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Webhook support for event notifications</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="bg-gray-800 rounded-lg p-4 text-white">
+                                <div class="flex justify-between items-center mb-4">
+                                    <span class="text-sm font-mono">JavaScript Example</span>
+                                    <button class="text-sm text-gray-400 hover:text-white">
+                                        <i class="fas fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                                <pre class="code-block text-sm overflow-x-auto">
+// Verify student results via API
+const verifyStudentResult = async (studentId, quizId) => {
+  const response = await fetch('https://api.quizmaker.top/v1/verify', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ studentId, quizId })
+  });
+  return await response.json();
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verification Tab Content -->
+                <div id="verification-tab" class="tab-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Flexible Student Verification</h3>
+                            <p class="text-gray-600 mb-6">
+                                Instructors have complete control over student verification. Choose between open access or 
+                                secure verification using CBTHost pass codes to prevent unauthorized test attempts.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Open access tests (no verification needed)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Secure pass code access (cbthost-pssi-0000 format)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Student filtering by class, group, or individual</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Time-limited access codes</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="bg-white border border-gray-200 rounded-lg p-6 w-full max-w-md">
+                                <h4 class="font-bold text-lg mb-4">Test Access Options</h4>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <input type="radio" id="open-access" name="access-type" class="mr-3" checked>
+                                        <label for="open-access" class="flex-1">
+                                            <span class="block font-medium">Open Access</span>
+                                            <span class="block text-sm text-gray-600">No verification required</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="passcode-access" name="access-type" class="mr-3">
+                                        <label for="passcode-access" class="flex-1">
+                                            <span class="block font-medium">Pass Code Access</span>
+                                            <span class="block text-sm text-gray-600">Students need code to participate</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="filtered-access" name="access-type" class="mr-3">
+                                        <label for="filtered-access" class="flex-1">
+                                            <span class="block font-medium">Filtered Access</span>
+                                            <span class="block text-sm text-gray-600">Select specific students/groups</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management Tab Content -->
+                <div id="data-tab" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-4">Advanced Data Management</h3>
+                            <p class="text-gray-600 mb-6">
+                                Efficiently manage student data, import records via Excel, and collaborate using smart phrases 
+                                to share content between accounts. Fully secure with zero data loss guarantee.
+                            </p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Excel/XLS student record uploads</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Smart phrases for content sharing</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Multiple question types support (OBJ, Multi-choice, Fill-in)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Image import and media support</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-slido-green mt-1 mr-2"></i>
+                                    <span>Enterprise-grade security & data protection</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="bg-white border border-gray-200 rounded-lg p-6">
+                                <h4 class="font-bold text-lg mb-4">Data Import Example</h4>
+                                <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                                    <div class="flex text-sm font-mono text-gray-700 mb-2">
+                                        <div class="w-1/4">CBT Pass Code</div>
+                                        <div class="w-1/4">Test ID</div>
+                                        <div class="w-1/4">Test Information</div>
+                                      
+                                    </div>
+                                    <div class="flex text-sm font-mono text-gray-900 mb-1">
+                                        <div class="w-1/4">cbthost-pssi-0000</div>
+                                        <div class="w-1/4">john@edu.edu</div>
+                                        <div class="w-1/4">John Doe</div>
+                                        
+                                    </div>
+                                    <div class="flex text-sm font-mono text-gray-900 mb-1">
+                                        <div class="w-1/4">cbthost-pssi-0000</div>
+                                        <div class="w-1/4">john@edu.edu</div>
+                                        <div class="w-1/4">John Doe</div>
+                                        
+                                    </div>
+                                    <div class="flex text-sm font-mono text-gray-900 mb-1">
+                                        <div class="w-1/4">cbthost-pssi-0000</div>
+                                        <div class="w-1/4">john@edu.edu</div>
+                                        <div class="w-1/4">John Doe</div>
+                                        
+                                    </div>
+                                   
+                                </div>
+                                <p class="text-sm text-gray-600">
+                                    Upload Excel files to automatically assign students to test using the passcode.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Flexible Pricing for Every Need</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    From individual instructors to large institutions, we have a plan that works for you.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Starter</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">Free</span>
+                        <span class="text-gray-600">/ forever</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Unlimited quizzes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>100 students</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Basic question types</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-400 mt-1 mr-2"></i>
+                            <span class="text-gray-500">API access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-times text-gray-400 mt-1 mr-2"></i>
+                            <span class="text-gray-500">Excel import</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-gray-100 text-gray-800 py-3 rounded-lg font-medium">
+                        Get Started Free
+                    </button>
+                </div>
+
+                <div class="bg-white border-2 border-slido-blue rounded-xl p-8 shadow-lg relative">
+                    <div class="absolute top-0 right-0 bg-slido-blue text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                        MOST POPULAR
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Institutional</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">$10</span>
+                        <span class="text-gray-600">/ month</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Unlimited quizzes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>1,000 students</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>All question types + images</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Basic API access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Excel import/export</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-slido-blue text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        Get Started
+                    </button>
+                </div>
+
+                <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Enterprise</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-bold">Custom</span>
+                        <span class="text-gray-600">pricing</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Unlimited everything</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Full API access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Advanced analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Team invitation - 100</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>50,000 API requests/month</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-slido-green mt-1 mr-2"></i>
+                            <span>Dedicated support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-gray-800 text-white py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Section -->
+    <section class="py-16 bg-slido-light">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Take Quizzes On The Go</h2>
+                <p class="text-xl text-gray-600 mb-8">
+                    Our free mobile app makes it easy for students to participate in quizzes and practice tests from anywhere. Available now on Google Play Store.
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm inline-block">
+                    <h3 class="font-bold text-lg mb-4">Download Our App</h3>
+                    <a href="#" class="inline-block">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14">
+                    </a>
+                    <p class="text-sm text-gray-500 mt-2">Free to download • No in-app purchases</p>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-slido-green rounded-3xl opacity-10 transform rotate-3"></div>
+                    <div class="relative bg-white p-6 rounded-2xl shadow-xl border border-gray-100 w-64 mx-auto">
+                        <div class="bg-gray-800 rounded-t-xl h-8 absolute -top-8 left-0 right-0 mx-6 rounded-b-md"></div>
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-bold">Current Quiz</h3>
+                            <span class="bg-slido-green text-white text-xs px-2 py-1 rounded">85%</span>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                            <p class="text-sm font-medium mb-2">Biology: Cell Structure</p>
+                            <div class="w-full bg-gray-300 h-2 rounded-full">
+                                <div class="bg-slido-green h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-slido-green rounded-full flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-brain text-sm"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Math Quiz</span>
+                                </div>
+                                <span class="text-xs text-gray-500">10m ago</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-slido-purple rounded-full flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-flask text-sm"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Science Test</span>
+                                </div>
+                                <span class="text-xs text-gray-500">1h ago</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-around mt-6 pt-4 border-t border-gray-200">
+                            <div class="text-center">
+                                <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-home text-gray-600"></i>
+                                </div>
+                                <span class="text-xs mt-1">Home</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-10 h-10 bg-slido-green rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-book-open text-white"></i>
+                                </div>
+                                <span class="text-xs mt-1">Quizzes</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-user text-gray-600"></i>
+                                </div>
+                                <span class="text-xs mt-1">Profile</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-20 bg-slido-light">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Learning?</h2>
+            <p class="text-xl max-w-2xl mx-auto mb-8 text-gray-600">
+                Join thousands of educators and students who use QuizMaker.top to simplify online assessment and learning.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://cbthost.com">
+                <button class="bg-slido-green text-white px-8 py-4 rounded-lg font-bold hover:bg-green-700 transition-colors flex items-center justify-center mx-auto">
+                    <i class="fas fa-user-plus mr-2"></i> Sign Up Free
+                </button>
+                </a>
+                <a href="#">
+                <button class="bg-white text-slido-green border border-slido-green px-8 py-4 rounded-lg font-bold hover:bg-gray-50 transition-colors">
+                    Download Mobile App
+                </button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <a href="#" class="text-slido-green text-2xl font-bold flex items-center mb-4">
+                        <i class="fas fa-pencil-alt mr-2"></i>
+                        QuizMaker<span class="text-blue-400">.top</span>
+                    </a>
+                    <p class="text-sm mb-4">Making learning and assessment accessible to everyone, everywhere.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">Community</a></li>
+                        <li><a href="#" class="hover:text-white">Lesson Ideas</a></li>
+                        <li><a href="#" class="hover:text-white">API Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">About Us</a></li>
+                        <li><a href="#" class="hover:text-white">Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                        <li><a href="https://cbthost.com" class="hover:text-white">CBTHost.com</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Data Processing</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-sm text-gray-400">QuizMaker.top is part of the <a href="https://cbthost.com" class="text-blue-400 hover:underline">CBTHost.com</a> network – empowering online learning worldwide.</p>
+                <p class="mt-2 text-xs text-gray-500">&copy; 2025 QuizMaker.top. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                
+                // Update button states
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                // Update content visibility
+                tabContents.forEach(content => content.classList.add('hidden'));
+                document.getElementById(tabId).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

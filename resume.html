@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejeh Juliet Enenyo | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a5acd;
+            --secondary: #ff7f50;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+            --cream: #fef7e5;
+            --accent: #4a4063;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item i {
+            color: var(--secondary);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+
+        /* Profile Section */
+        .profile-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .profile-text {
+            flex: 1;
+        }
+
+        .profile-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .profile-highlights {
+            flex: 1;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--cream);
+        }
+
+        .skill-list {
+            list-style-type: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            right: -10px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        /* Education & Certifications */
+        .edu-cert-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .edu-card, .cert-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .edu-card h3, .cert-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .edu-date, .cert-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Awards Section */
+        .awards-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .award-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .award-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .award-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .profile-content {
+                flex-direction: column;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <img src="juliet.jpeg" alt="Ejeh Juliet Enenyo" class="profile-img">
+            <div class="header-content">
+                <h1>EJEH JULIET ENENYO</h1>
+                <p>Science Laboratory Technologist | Customer Service Specialist | Virtual Assistant | Social Media Manager</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kugbo Extension Layout, FCT, Abuja</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(+234) 07040191800</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ejehjuliet396@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <!-- <div class="logo">JULIET</div> -->
+            <div class="nav-links">
+                <a href="#profile">Profile</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#education">Education</a>
+                <a href="#certifications">Certifications</a>
+                <a href="#awards">Awards</a>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section id="profile">
+        <div class="container">
+            <h2 class="section-title">Profile Info</h2>
+            <div class="profile-content">
+                <div class="profile-text">
+                    <p>I'm a passionate and result-oriented Science Laboratory Technology graduate with hands-on experience in customer service, sales, and administrative support. Skilled in customer relationship management (CRM), social media management, and Microsoft Office Suite.</p>
+                    <p>Recently completed certifications in Customer Journey Mapping and AI for CRM Excellence, equipping me with modern strategies to improve customer satisfaction and retention.</p>
+                    <p>My diverse skill set spans across multiple disciplines with a particular expertise in virtual assistance, customer service representative and social media management.</p>
+                </div>
+                <div class="profile-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div>
+                            <h3>Science Laboratory Technology</h3>
+                            <p>Graduated with expertise in analytical chemistry and microbiology</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h3>Customer Service</h3>
+                            <p>Experienced in delivering excellent customer support and relationship management</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h3>Sales & CRM</h3>
+                            <p>Proven track record in sales and customer retention strategies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Professional Skills</h3>
+                    <ul class="skill-list">
+                        <li>Virtual Assistance and Administrative Support</li>
+                        <li>Customer Service and Customer Relationship Management</li>
+                        <li>Social Media Management</li>
+                        <li>Microsoft Office Suite (Word, Excel, PowerPoint)</li>
+                        <li>Time Management and Multitasking</li>
+                        <li>Excellent Written and Verbal Communication</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Laboratory Skills</h3>
+                    <ul class="skill-list">
+                        <li>Analytical Chemistry</li>
+                        <li>Biochemistry</li>
+                        <li>Instrumentation</li>
+                        <li>Microbiology</li>
+                        <li>Laboratory Techniques</li>
+                        <li>Scientific Reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Sales Representative and Customer Service Representative</h3>
+                        <div class="timeline-date">June 2024 - Present</div>
+                        <p><strong>Emerald Enterprise, Kugbo Extension Layout, Abuja, F.C.T</strong></p>
+                        <p>Delivered excellent customer service, handled clients inquiries, resolved issues promptly.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Sales Representative</h3>
+                        <div class="timeline-date">February 2022 - September 2022</div>
+                        <p><strong>Kings POS, Nyanya, Abuja, F.C.T</strong></p>
+                        <p>Increased customer satisfaction and customer retention through strong communication.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Sales Representative</h3>
+                        <div class="timeline-date">August 2020 - December 2020</div>
+                        <p><strong>Mikephine, New Nyanya, Abuja, F.C.T</strong></p>
+                        <p>Managed cash and maintained accurate daily sales records.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-cert-container">
+                <div class="edu-card">
+                    <h3>Bachelor of Science (B.Sc.), Science Laboratory Technology</h3>
+                    <div class="edu-date">January 2020 - September 2025</div>
+                    <p><strong>Nasarawa State University, Keffi, Nasarawa, Nigeria</strong></p>
+                    <p><strong>Relevant coursework:</strong> Analytical Chemistry, Biochemistry, Instrumentation, Microbiology</p>
+                    <p><strong>Research Project:</strong> Assessment of Minerals and Proximate Nutrients in a Multi-mix Diet for Preschool Aged Children</p>
+                    <p>Developed strong skills in laboratory techniques and scientific reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="edu-cert-container">
+                <div class="cert-card">
+                    <h3>Customer Journey Mapping: Customer Service, CRM & Retention</h3>
+                    <div class="cert-date">October 2025</div>
+                    <p><strong>Udemy</strong></p>
+                </div>
+                <div class="cert-card">
+                    <h3>AI for CRM (Customer Relationship Management) Excellence</h3>
+                    <div class="cert-date">October 2025</div>
+                    <p><strong>Udemy</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title">Awards</h2>
+            <div class="awards-container">
+                <div class="award-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Best Sales Representative of the Year</h3>
+                    <p>Emerald Enterprise (2024)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h2>Get In Touch</h2>
+                <p>Feel free to reach out for collaboration or opportunities</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>ejehjuliet396@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>(+234) 07040191800</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <p>&copy; 2025 Ejeh Juliet Enenyo. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    if(window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
